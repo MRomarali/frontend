@@ -49,9 +49,8 @@
             calculate: function(){
               this.$http.post('http://jsonplaceholder.typicode.com/posts',{
                   income: this.billings.income,
-                  userId: 1
               }).then(function (data) {
-                    console.log(data)
+                 console.log(data)
               })
             },
 

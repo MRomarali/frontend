@@ -22,6 +22,6 @@ const router = new Router({
             component: () => import("./components/Billing"),
     }
     ]
-});
+});//
 
 export default router;
