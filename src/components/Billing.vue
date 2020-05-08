@@ -18,7 +18,7 @@
                 <div class="row">
                     <button class="btn btn-success" v-on:click="addCourse()">Add</button>
                 </div>
-            </form>
+            </form>//
         </div>
     </div>
 </template>
