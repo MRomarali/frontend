@@ -29,7 +29,7 @@
                 </tbody>
             </table>
             <div class="row">
-                <button class="btn btn-success" v-on:click="calculate">Calculate</button>
+                <button class="btn btn-success" v-on:click="calculate()">Calculate</button>
             </div>
         </div>
     </div>
@@ -42,33 +42,28 @@
             return {
                 billings: [{number: 1},{number: 2},{number: 3}],
                 message: "",
-                INSTRUCTOR: "Omar"
+                income: "",
+                INSTRUCTOR: "Omar",
+                errors: []
+            }
+        },
+        computed: {
+            id() {
+                return this.$route.params.id;
             }
         },
         methods: {
-            calculate: function(){
-              this.$http.post('http://jsonplaceholder.typicode.com/posts',{
-                  income: this.billings.income,
-              }).then(function (data) {
-                 console.log(data)
-              })
+            calculate() {
+                this.$router.push(`/Billings`);
             },
-//
-            refreshBillings() {
-
-            },
-            Calculate() {
-
-            },
-            createBillings(id) {
-                BillingService.createBillings(this.INSTRUCTOR, id)
-                    .then(() => {
-                        this.refreshBillings();
-                    });
-            },
+            refreshCourseDetails() {
+                BillingService.retrieveBillings(this.INSTRUCTOR, this.id).then(res => {
+                    this.income = res.data.income;
+                });
+            }
         },
         created() {
-            this.refreshBillings();
+            this.refreshCourseDetails();
         }
-    }
+    };
 </script>

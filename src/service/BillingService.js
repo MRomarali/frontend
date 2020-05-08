@@ -12,12 +12,6 @@ class BillingService {
         //console.log('executed service')
     return axios.get(`${INSTRUCTOR_API_URL}/billings/${id}`);
     }
-//
-    // eslint-disable-next-line
-    updateBillings(name, id, billing) {
-        //console.log('executed service')
-        return axios.put(`${INSTRUCTOR_API_URL}/billings/${id}`, billing);
-    }
 
     // eslint-disable-next-line
     createBillings(name, billing) {

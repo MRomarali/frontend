@@ -19,9 +19,8 @@ const router = new Router({
         {
             path: "/billing/:id",
             name: "Billings",
-            component: () => import("./components/Billing"),
+            component: () => import("./components/Billings"),
     }
     ]
-});//
-//
+});
 export default router;
