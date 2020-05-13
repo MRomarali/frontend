@@ -1,7 +1,10 @@
 import axios from 'axios'
 
+
 const INSTRUCTOR = 'Omar'
-const INSTRUCTOR_API_URL = `/instructors/${INSTRUCTOR}`
+const Billing_API_URL = 'http://localhost:8080'
+const INSTRUCTOR_API_URL = `${Billing_API_URL}/instructors/${INSTRUCTOR}`
+
 
 class BillingService {
 

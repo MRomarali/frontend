@@ -45,18 +45,17 @@
         name: "billings",
         data() {
             return {
-                billings: [{ number: 1 }, { number: 2 }, { number: 3 }],
-                options: {
-                    opt1: "Förskola 1-2år, mer än 15 tim",
-                    opt2: "Förskola 1-2år, max 15 tim",
-                    opt3: "Allmän förskola 3-5år, mer än 15 tim",
-                    opt4: "Fritidshem 6-10år",
-                    opt5: "Allmän förskola 3-5år, max 15 tim"
-                },
+                billings: [{number: 1},{number: 2},{number: 3}],
+                options: ['Förskola 1-2år, mer än 15 tim',
+                    'Förskola 1-2år, max 15 tim',
+                    'Allmän förskola 3-5år, mer än 15 tim',
+                    'Fritidshem 6-10år',
+                    'Allmän förskola 3-5år, max 15 tim'],
                 message: "",
                 income: "",
+                INSTRUCTOR: "Omar",
                 errors: []
-            };
+            }
         },
         computed: {
             id() {
@@ -66,7 +65,6 @@
         methods: {
             calculate() {
                 console.log(this.income);
-
                 const exampleData = {
                     income: this.income,
                     children: this.billings.length,
