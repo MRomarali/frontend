@@ -21,13 +21,13 @@
                         {{ billings.number }}</td>
                     <td>
                         <select>
-                            <option  v-for="option in options" v-bind:key="option">
+                            <option v-for="option in options" v-bind:key="option">
                                 {{ option }}
                             </option>
                         </select>
                     </td>
                     <td>
-                        {{ income }}: SEK</td>
+                        {{  }}: SEK</td>
                 </tr>
                 </tbody>
             </table>
@@ -42,10 +42,10 @@
 <script>
     import BillingService from "../service/BillingService";
     export default {
-        name: "billings",
+        name: "calculate",
         data() {
             return {
-                billings: [{number: 1},{number: 2},{number: 3}],
+                billings: [{number: 1 }, {number: 2},{number: 3}],
                 options: ['Förskola 1-2år, mer än 15 tim',
                     'Förskola 1-2år, max 15 tim',
                     'Allmän förskola 3-5år, mer än 15 tim',
@@ -53,7 +53,6 @@
                     'Allmän förskola 3-5år, max 15 tim'],
                 message: "",
                 income: "",
-                INSTRUCTOR: "Omar",
                 errors: []
             }
         },
@@ -65,10 +64,14 @@
         methods: {
             calculate() {
                 console.log(this.income);
+                console.log(this.barn1Typ);
+                console.log(this.barn2Typ);
+                console.log(this.barn3Typ);
                 const exampleData = {
                     income: this.income,
-                    children: this.billings.length,
-                    amount: [100,200,300]
+                    barn1Typ: this.barn1Typ  * this.income,
+                    barn2Typ: this.barn2Typ  * this.income,
+                    barn3Typ: this.barn3Typ  * this.income
                 };
 
                 fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -86,14 +89,28 @@
                         console.error("Error:", error);
                     });
             },
-            refreshBillingDetails() {
-                BillingService.retrieveBillings(this.id).then(res => {
+            postBillingDetails(){
+                BillingService.createBilling(this.name).then(res =>{
                     this.income = res.data.income;
+                    this.barn1Typ = res.data.barn1Typ;
+                    this.barn2Typ = res.data.barn2Typ;
+                    this.barn3Typ = res.data.barn3Typ;
+                }).then(() =>{
+                    this.$router.push('/calculate-sum');
+                });
+            },
+            refreshBillingDetails() {
+                BillingService.retrieveBillings(this.name).then(res => {
+                    this.income = res.data.income;
+                    this.barn1Typ = res.data.barn1Typ;
+                    this.barn2Typ = res.data.barn2Typ;
+                    this.barn3Typ = res.data.barn3Typ;
                 });
             }
         },
         created() {
             this.refreshBillingDetails();
+            this.postBillingDetails();
         }
     };
 </script>

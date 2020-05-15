@@ -1,18 +1,15 @@
 import axios from 'axios'
 
-
-const INSTRUCTOR = 'Omar'
-const Billing_API_URL = 'http://localhost:8080'
-const INSTRUCTOR_API_URL = `${Billing_API_URL}/instructors/${INSTRUCTOR}`
-
-
 class BillingService {
 
-    // eslint-disable-next-line
-    retrieveBillings(name, id) {
+    createBilling(name, calculate){
         //console.log('executed service')
-    return axios.get(`${INSTRUCTOR_API_URL}/billings`);
+        return axios.post(`http://localhost:8080/calculate`, calculate)
+    }
+    // eslint-disable-next-line
+    retrieveBillings(name, calculate) {
+        //console.log('executed service')
+    return axios.get(`http://localhost:8080/calculate`, calculate);
     }
 }
-
 export default new BillingService()
