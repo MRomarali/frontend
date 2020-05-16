@@ -16,18 +16,50 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="billings in billings" v-bind:key="billings.id">
+                <tr>
                     <td>
-                        {{ billings.number }}</td>
+                        {{ 1 }}</td>
                     <td>
                         <select>
-                            <option v-for="option in options" v-bind:key="option">
-                                {{ option }}
-                            </option>
+                            <option>Förskola 1-2år, mer än 15 tim</option>
+                            <option>Förskola 1-2år, max 15 tim</option>
+                            <option>Allmän förskola 3-5år, mer än 15 tim</option>
+                            <option>Fritidshem 6-10år</option>
+                            <option>Allmän förskola 3-5år, max 15 tim</option>
                         </select>
                     </td>
                     <td>
-                        <input type="number" id="result" v-model="result">: SEK</td>
+                        {{ amountBarn1 }}:SEK</td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ 2 }}</td>
+                    <td>
+                        <select>
+                            <option>Förskola 1-2år, mer än 15 tim</option>
+                            <option>Förskola 1-2år, max 15 tim</option>
+                            <option>Allmän förskola 3-5år, mer än 15 tim</option>
+                            <option>Fritidshem 6-10år</option>
+                            <option>Allmän förskola 3-5år, max 15 tim</option>
+                        </select>
+                    </td>
+                    <td>
+                        {{ amountBarn2 }}:SEK</td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ 3 }}</td>
+                    <td>
+                        <select>
+                            <option>Förskola 1-2år, mer än 15 tim</option>
+                            <option>Förskola 1-2år, max 15 tim</option>
+                            <option>Allmän förskola 3-5år, mer än 15 tim</option>
+                            <option>Fritidshem 6-10år</option>
+                            <option>Allmän förskola 3-5år, max 15 tim</option>
+                        </select>
+                    </td>
+                    <td>
+                        {{ amountBarn3 }}:SEK</td>
                 </tr>
                 </tbody>
             </table>
@@ -45,11 +77,23 @@
         data() {
             return {
                 billings: [{number: 1 }, {number: 2},{number: 3}],
-                options: ['Förskola 1-2år, mer än 15 tim',
-                    'Förskola 1-2år, max 15 tim',
-                    'Allmän förskola 3-5år, mer än 15 tim',
-                    'Fritidshem 6-10år',
-                    'Allmän förskola 3-5år, max 15 tim'],
+                /**
+                 * options: ['Förskola 1-2år, mer än 15 tim',
+                 'Förskola 1-2år, max 15 tim',
+                 'Allmän förskola 3-5år, mer än 15 tim',
+                 'Fritidshem 6-10år',
+                 'Allmän förskola 3-5år, max 15 tim'],
+                 */
+                /**
+                 * options: {
+                    1: "Förskola 1-2år, mer än 15 tim",
+                    2: "Förskola 1-2år, max 15 tim",
+                    3: "Allmän förskola 3-5år, mer än 15 tim",
+                    4: "Fritidshem 6-10år",
+                    5: "Allmän förskola 3-5år, max 15 tim",
+                },
+                 */
+
                 message: "",
                 income: "",
                 barn1Typ: "",
@@ -66,34 +110,19 @@
                 return this.$route.params.id;
             },
             result: function(){
-                let maxAmount = 40000;
-                let barnTyp1 = 0.02;
-                let barnTyp2 = 0.04;
-                if (this.income < maxAmount){
-                    return this.income * barnTyp1;
-                } else if (this.income > maxAmount) {
-                    return this.income * barnTyp2;
-                }
-                return 0;
+                return this.amountBarn1;
             }
         },
         methods: {
+
             calculate() {
-                /**
-                 *
-                 */
-                console.log(this.income);
-                console.log(this.barn1Typ);
-                console.log(this.barn2Typ);
-                console.log(this.barn3Typ);
-                console.log(this.amountBarn1);
-                console.log(this.amountBarn2);
-                console.log(this.amountBarn3);
+
+
                 const exampleData = {
                     income: this.income,
-                    barn1Typ: this.barn1Typ,
-                    barn2Typ: this.barn2Typ,
-                    barn3Typ: this.barn3Typ,
+                    barn1Typ: 1,
+                    barn2Typ: 1,
+                    barn3Typ: 1,
                 };
                 fetch('http://localhost:8080/calculate-sum', {
                     method: "POST", // or 'PUT'
@@ -104,10 +133,9 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        this.income = data.income;
-                            //this.amountBarn1 = data.amountBarn1,
-                            //this.amountBarn2 = data.amountBarn2,
-                            //this.amountBarn3 = data.amountBarn3
+                            this.amountBarn1 = data.amountBarn1,
+                            this.amountBarn2 = data.amountBarn2,
+                            this.amountBarn3 = data.amountBarn3
                             console.log("Success:", exampleData, data);
                     })
                     .catch(error => {
