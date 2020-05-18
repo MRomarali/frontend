@@ -140,10 +140,10 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                            this.amountBarn1 = data.amountBarn1,
+                        this.amountBarn1 = data.amountBarn1,
                             this.amountBarn2 = data.amountBarn2,
                             this.amountBarn3 = data.amountBarn3
-                            console.log("Success:", BarnTyp, data);
+                        console.log("Success:", BarnTyp, data);
                     })
                     .catch(error => {
                         console.error("Error:", error);
