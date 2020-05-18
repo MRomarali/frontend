@@ -106,7 +106,6 @@
                 selected1: "",
                 selected2: "",
                 selected3: "",
-                billings: [{number: 1 }, {number: 2},{number: 3}],
                 message: "",
                 income: "",
                 barn1Typ: "",
@@ -119,9 +118,6 @@
             }
         },
         computed: {
-            id() {
-                return this.$route.params.id;
-            },
         },
         methods: {
             calculate() {
@@ -140,7 +136,7 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        this.amountBarn1 = data.amountBarn1,
+                            this.amountBarn1 = data.amountBarn1,
                             this.amountBarn2 = data.amountBarn2,
                             this.amountBarn3 = data.amountBarn3
                         console.log("Success:", BarnTyp, data);
